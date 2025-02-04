@@ -291,10 +291,10 @@ for inclusion into the user prompt for the gptel request."
   (when-let* ((par (org-element-lineage object '(paragraph))))
     (and (= (gptel-org--element-begin object)
             (save-excursion
-              (goto-char (and par (org-element-property :contents-begin par)))
+              (goto-char (org-element-property :contents-begin par))
               (skip-chars-forward "\t ")
               (point)))                 ;account for leading space
-         (<= (- (and par (org-element-property :contents-end par))(org-element-property :end object))
+         (<= (- (org-element-property :contents-end par) (org-element-property :end object))
              1))))
 
 (defun gptel-org--send-with-props (send-fun &rest args)
